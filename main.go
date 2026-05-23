@@ -21,7 +21,7 @@ func main() {
 	// Initialize repository, service, and handler
 	repo := repository.New(cfg.Database)
 	srv := service.New(repo)
-	h := handler.NewService(srv)
+	h := handler.NewHandler(srv)
 	router := gin.Default()
 
 	api := router.Group("/api")
