@@ -50,3 +50,15 @@ func (r *BookRepository) GetAllBooks(ctx context.Context) ([]*Book, error) {
 	}
 	return books, nil
 }
+
+func (r *BookRepository) UpdateBook(ctx context.Context, book *Book) error {
+	query := "UPDATE books SET title = $1, author = $2, year = $3 WHERE id = $4"
+	_, err := r.db.ExecContext(ctx, query, book.Title, book.Author, book.Year, book.ID)
+	return err
+}
+
+func (r *BookRepository) DeleteBook(ctx context.Context, id uint) error {
+	query := "DELETE FROM books WHERE id = $1"
+	_, err := r.db.ExecContext(ctx, query, id)
+	return err
+}
